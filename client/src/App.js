@@ -11,17 +11,17 @@ class App extends Component {
   componentDidMount() {
     axios.get("/api/items")
       .then( res => {
-        this.setState({ todos: res.data })
+        this.setState({ todos: res.data });
       })
       .catch( err => {
-        console.log(err)
+        console.log(err);
       })
   }
 
   addItem = (name) => {
     // add the todo item to the database
     // add it to state
-    axios.post("/api/items", {name})
+    axios.post('/api/items', {name})
       .then( res => {
         const { todos } = this.state
         this.setState({ todos: [...todos, res.data]})

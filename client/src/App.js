@@ -34,13 +34,14 @@ class App extends Component {
   updateTodo = (id) => {
     // update the todo item in the database
     // update it to state
-    axios.put(`/api/items.${id}`)
+    axios.put(`/api/items/${id}`)
       .then( res => {
         const todos = this.state.todos.map( t => {
           if (t.id === id)
             return res.data
           return t
         })
+        this.setState({ todos })
       })
       .catch( err => {
         console.log(err)
@@ -48,13 +49,13 @@ class App extends Component {
   }
 
   deleteTodo = (id) => {
+    // delete the todo item from the database
+    // delete it from state
     axios.delete(`/api/items/${id}`)
       .then( res => {
         const { todos } = this.state
         this.setState({ todos: todos.filter(t => t.id !== id)})
       })
-    // delete the todo item from the database
-    // delete it from state
       .catch( err => {
         console.log(err)
       })
